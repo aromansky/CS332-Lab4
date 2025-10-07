@@ -9,6 +9,12 @@ using static CS332_Lab4.Transform;
 
 namespace CS332_Lab4
 {
+    public enum PointClassification
+    {
+        Right,
+        Left
+    }
+
     public class MyPolygon
     {
         private bool recorded = false;
@@ -22,7 +28,8 @@ namespace CS332_Lab4
         /// </summary>
         private List<PointF[]> edges;
         public List<PointF> Points { get { return points.Select(p => new PointF(p.X, p.Y)).ToList(); } }
-        public List<PointF[]> Edges {
+        public List<PointF[]> Edges
+        {
             get
             {
                 return edges.Select(edge => new PointF[]
@@ -80,9 +87,9 @@ namespace CS332_Lab4
                 }
                 else
                 {
-                    PointF[] edge = new PointF[2] { LastPoint(), point};
-                    
-                    
+                    PointF[] edge = new PointF[2] { LastPoint(), point };
+
+
                     if (this.edges.Count == 0)
                     {
                         this.edges.Add(edge);
@@ -93,7 +100,7 @@ namespace CS332_Lab4
                         this.edges[edges.Count - 1] = edge;
                     }
                     this.points.Add(point);
-                    
+
                     this.edges.Add(new PointF[2] { points.Last(), points.First() });
                 }
             }
@@ -163,12 +170,29 @@ namespace CS332_Lab4
                 {
                     inside = !inside;
                 }
-            } 
+            }
 
             return inside;
         }
 
-        
+        public static PointClassification ClassifyPoint(PointF point, PointF[] edge)
+        {
+            if (edge.Length != 2)
+                throw new ArgumentException("Ребро должно содержать 2 точки!");
+
+            PointF p1 = edge[0];
+            PointF p2 = edge[1];
+
+            float crossProduct = (p2.X - p1.X) * (point.Y - p1.Y) -
+                                 (p2.Y - p1.Y) * (point.X - p1.X);
+
+            if (crossProduct > 0)
+                return PointClassification.Right;
+            else if (crossProduct < 0)
+                return PointClassification.Left;
+            else
+                return PointClassification.Left;    // Точка на прямой ребра (считаем справа)
+        }
 
         public static PointF? FindIntersection(PointF[] edge1, PointF[] edge2)
         {

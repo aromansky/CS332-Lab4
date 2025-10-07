@@ -13,18 +13,24 @@ namespace CS332_Lab4
     public partial class Menu : Form
     {
         List<MyPolygon> myPolygons = new List<MyPolygon>();
+        List<PointF[]> edges = new List<PointF[]>();
+
         MyPolygon currentPolygon = new MyPolygon();
 
         MyPolygon selectedPolygon = new MyPolygon();
         PointF polygonPoint;
 
         PointF selectedPoint;
+        PointF[] selectedEdge;
         Pen p;
 
 
         bool creatingPolygon = false;
         bool selectingPolygon = false;
         bool selectingPoint = false;
+        bool selectingEdge = false;
+
+        bool classificate = false;
 
         public Menu()
         {
@@ -78,6 +84,12 @@ namespace CS332_Lab4
 
             button_ClearPoint.Visible = !creatingPolygon;
             button_ClearPoint.Enabled = !creatingPolygon;
+
+            button_Classificate.Visible = !creatingPolygon;
+            button_Classificate.Enabled = !creatingPolygon;
+
+            button_SelectEdge.Visible = !creatingPolygon;
+            button_SelectEdge.Enabled = !creatingPolygon;
         }
 
         public void SelectingPolygon()
@@ -125,6 +137,12 @@ namespace CS332_Lab4
 
             button_ClearPoint.Visible = !selectingPolygon;
             button_ClearPoint.Enabled = !selectingPolygon;
+
+            button_Classificate.Visible = !selectingPolygon;
+            button_Classificate.Enabled = !selectingPolygon;
+
+            button_SelectEdge.Visible = !selectingPolygon;
+            button_SelectEdge.Enabled = !selectingPolygon;
         }
 
         public void SelectingPoint()
@@ -172,6 +190,119 @@ namespace CS332_Lab4
 
             button_ClearPoint.Visible = !selectingPoint;
             button_ClearPoint.Enabled = !selectingPoint;
+
+            button_Classificate.Visible = !selectingPoint;
+            button_Classificate.Enabled = !selectingPoint;
+
+            button_SelectEdge.Visible = !selectingPoint;
+            button_SelectEdge.Enabled = !selectingPoint;
+
+        }
+
+        public void SelectingEdge()
+        {
+            button_ClearPoligons.Visible = !selectingEdge;
+            button_ClearPoligons.Enabled = !selectingEdge;
+
+            button_CreatePolygon.Visible = !selectingEdge;
+            button_CreatePolygon.Enabled = !selectingEdge;
+
+            button_SelectPolygon.Visible = !selectingEdge;
+            button_SelectPolygon.Enabled = !selectingEdge;
+
+            button_Translation.Visible = !selectingEdge;
+            button_Translation.Enabled = !selectingEdge;
+
+            label1.Visible = !selectingEdge;
+            numericUpDown_Dx.Visible = !selectingEdge;
+            numericUpDown_Dx.Enabled = !selectingEdge;
+
+            label2.Visible = !selectingEdge;
+            numericUpDown_Dy.Visible = !selectingEdge;
+            numericUpDown_Dy.Enabled = !selectingEdge;
+
+            button_Rotate.Visible = !selectingEdge;
+            button_Rotate.Enabled = !selectingEdge;
+
+            label3.Visible = !selectingEdge;
+            numericUpDown_Rotation.Visible = !selectingEdge;
+            numericUpDown_Rotation.Enabled = !selectingEdge;
+
+            trackBar_Rotation.Visible = !selectingEdge;
+            trackBar_Rotation.Enabled = !selectingEdge;
+
+            button_Dilation.Visible = !selectingEdge;
+            button_Dilation.Enabled = !selectingEdge;
+
+            label4.Visible = !selectingEdge;
+            numericUpDown_DilatationX.Visible = !selectingEdge;
+            numericUpDown_DilatationX.Enabled = !selectingEdge;
+
+            label5.Visible = !selectingEdge;
+            numericUpDown_DilatationY.Visible = !selectingEdge;
+            numericUpDown_DilatationY.Enabled = !selectingEdge;
+
+            button_ClearPoint.Visible = !selectingEdge;
+            button_ClearPoint.Enabled = !selectingEdge;
+
+            button_SelectPoint.Visible = !selectingEdge;
+            button_SelectPoint.Enabled = !selectingEdge;
+
+            button_Classificate.Visible = !selectingEdge;
+            button_Classificate.Enabled = !selectingEdge;
+        }
+
+        public void Classificating()
+        {
+            button_ClearPoligons.Visible = !classificate;
+            button_ClearPoligons.Enabled = !classificate;
+
+            button_CreatePolygon.Visible = !classificate;
+            button_CreatePolygon.Enabled = !classificate;
+
+            button_SelectPolygon.Visible = !classificate;
+            button_SelectPolygon.Enabled = !classificate;
+
+            button_Translation.Visible = !classificate;
+            button_Translation.Enabled = !classificate;
+
+            label1.Visible = !classificate;
+            numericUpDown_Dx.Visible = !classificate;
+            numericUpDown_Dx.Enabled = !classificate;
+
+            label2.Visible = !classificate;
+            numericUpDown_Dy.Visible = !classificate;
+            numericUpDown_Dy.Enabled = !classificate;
+
+            button_Rotate.Visible = !classificate;
+            button_Rotate.Enabled = !classificate;
+
+            label3.Visible = !classificate;
+            numericUpDown_Rotation.Visible = !classificate;
+            numericUpDown_Rotation.Enabled = !classificate;
+
+            trackBar_Rotation.Visible = !classificate;
+            trackBar_Rotation.Enabled = !classificate;
+
+            button_Dilation.Visible = !classificate;
+            button_Dilation.Enabled = !classificate;
+
+            label4.Visible = !classificate;
+            numericUpDown_DilatationX.Visible = !classificate;
+            numericUpDown_DilatationX.Enabled = !classificate;
+
+            label5.Visible = !classificate;
+            numericUpDown_DilatationY.Visible = !classificate;
+            numericUpDown_DilatationY.Enabled = !classificate;
+
+            button_ClearPoint.Visible = !classificate;
+            button_ClearPoint.Enabled = !classificate;
+
+            button_SelectPoint.Visible = !classificate;
+            button_SelectPoint.Enabled = !classificate;
+
+            button_SelectEdge.Visible = !classificate;
+            button_SelectEdge.Enabled = !classificate;
         }
 
         private void panel1_Click(object sender, MouseEventArgs e)
@@ -191,7 +322,24 @@ namespace CS332_Lab4
             if (selectingPolygon)
             {
                 polygonPoint = e.Location;
-                panel1.Invalidate();
+            }
+
+            if (selectingEdge)
+            {
+                selectedEdge = selectedPolygon.SelectEdge(e.Location);
+            }
+
+            if (classificate)
+            {
+                if (MyPolygon.ClassifyPoint(e.Location, selectedEdge) == PointClassification.Right)
+                {
+                    MessageBox.Show("Правая точка", "Тип точки");
+                }
+                else
+                {
+                    MessageBox.Show("Левая точка", "Тип точки");
+                }
+                
             }
         }
 
@@ -211,6 +359,7 @@ namespace CS332_Lab4
                 if (currentPolygon.CountPoints() > 0)
                 {
                     myPolygons.Add(currentPolygon.Copy());
+                    edges = edges.Union(currentPolygon.Edges).ToList();
                     currentPolygon.Clear();
 
                     panel1.Invalidate();
@@ -221,10 +370,9 @@ namespace CS332_Lab4
 
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
-            
+            Graphics g = e.Graphics;
             if (myPolygons.Count != 0)
             {
-                Graphics g = e.Graphics;
                 foreach (MyPolygon polygon in myPolygons)
                 {
                     foreach (PointF[] edge in polygon.Edges)
@@ -236,7 +384,6 @@ namespace CS332_Lab4
 
             if (currentPolygon.CountPoints() > 0)
             {
-                Graphics g = e.Graphics;
                 PointF lastPoint = currentPolygon.LastPoint();
 
                 if (currentPolygon.CountPoints() == 1)
@@ -254,9 +401,34 @@ namespace CS332_Lab4
 
             if (selectedPoint != default)
             {
-                Graphics g = e.Graphics;
                 g.FillEllipse(Brushes.Red, selectedPoint.X - 2, selectedPoint.Y - 2, 4, 4);
             }
+
+
+
+            for (int i = 0; i < myPolygons.Count; i++)
+            {
+                for (int j = i + 1; j < myPolygons.Count; j++)
+                {
+                    MyPolygon polygon1 = myPolygons[i];
+                    MyPolygon polygon2 = myPolygons[j];
+
+                    foreach (PointF[] edge1 in polygon1.Edges)
+                    {
+                        foreach (PointF[] edge2 in polygon2.Edges)
+                        {
+                            PointF? intersect = MyPolygon.FindIntersection(edge1, edge2);
+
+                            if (intersect != null)
+                            {
+                                PointF point = new PointF((int)intersect.Value.X, (int)intersect.Value.Y);
+                                g.FillEllipse(Brushes.Blue, point.X - 4, point.Y - 4, 8, 8);
+                            }
+                        }
+                    }
+                }
+            }
+
         }
 
         private void button_ClearPoligons_Click(object sender, EventArgs e)
@@ -264,6 +436,7 @@ namespace CS332_Lab4
             myPolygons.Clear();
             currentPolygon.Clear();
             selectedPolygon.Clear();
+            edges.Clear();
             panel1.Invalidate();
         }
 
@@ -415,6 +588,62 @@ namespace CS332_Lab4
         {
             selectedPoint = default;
             panel1.Invalidate();
+        }
+
+        private void button_Classificate_Click(object sender, EventArgs e)
+        {
+            if (selectedPolygon.CountPoints() == 0)
+            {
+                MessageBox.Show("Сначала выберите полигон!", "Выбор ребра полигона");
+                return;
+            }
+
+            if (selectedEdge == null)
+            {
+                MessageBox.Show("Сначала выберите ребро полигона!", "Выбор ребра полигона");
+                return;
+            }
+
+            if (!classificate)
+            {
+                classificate = true;
+            }
+            else
+            {
+                classificate = false;
+            }
+            Classificating();
+        }
+
+        private void button_SelectEdge_Click(object sender, EventArgs e)
+        {
+            if (selectedPolygon.CountPoints() == 0)
+            {
+                MessageBox.Show("Сначала выберите полигон!", "Выбор ребра полигона");
+                return;
+            }
+
+            if (!selectingEdge)
+            {
+                button_SelectEdge.Text = "Готово";
+                selectingEdge = true;
+            }
+            else
+            {
+                if (selectedEdge == null)
+                {
+                    MessageBox.Show("Ребро не найдено!", "Выбор ребра");
+                    return;
+                }
+                else
+                {
+                    MessageBox.Show("Ребро выбрано", "Выбор ребра");
+                }
+
+                button_SelectEdge.Text = "Выбрать ребро полигона";
+                selectingEdge = false;
+            }
+            SelectingEdge();
         }
     }
 }

@@ -48,6 +48,8 @@
             this.label5 = new System.Windows.Forms.Label();
             this.button_SelectPoint = new System.Windows.Forms.Button();
             this.button_ClearPoint = new System.Windows.Forms.Button();
+            this.button_Classificate = new System.Windows.Forms.Button();
+            this.button_SelectEdge = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar_Rotation)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_Rotation)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_Dx)).BeginInit();
@@ -286,11 +288,33 @@
             this.button_ClearPoint.UseVisualStyleBackColor = true;
             this.button_ClearPoint.Click += new System.EventHandler(this.button_ClearPoint_Click);
             // 
+            // button_Classificate
+            // 
+            this.button_Classificate.Location = new System.Drawing.Point(566, 389);
+            this.button_Classificate.Name = "button_Classificate";
+            this.button_Classificate.Size = new System.Drawing.Size(222, 23);
+            this.button_Classificate.TabIndex = 26;
+            this.button_Classificate.Text = "Классифициорать точки";
+            this.button_Classificate.UseVisualStyleBackColor = true;
+            this.button_Classificate.Click += new System.EventHandler(this.button_Classificate_Click);
+            // 
+            // button_SelectEdge
+            // 
+            this.button_SelectEdge.Location = new System.Drawing.Point(566, 360);
+            this.button_SelectEdge.Name = "button_SelectEdge";
+            this.button_SelectEdge.Size = new System.Drawing.Size(222, 23);
+            this.button_SelectEdge.TabIndex = 27;
+            this.button_SelectEdge.Text = "Выбрать ребро полигона";
+            this.button_SelectEdge.UseVisualStyleBackColor = true;
+            this.button_SelectEdge.Click += new System.EventHandler(this.button_SelectEdge_Click);
+            // 
             // Menu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.button_SelectEdge);
+            this.Controls.Add(this.button_Classificate);
             this.Controls.Add(this.button_ClearPoint);
             this.Controls.Add(this.button_SelectPoint);
             this.Controls.Add(this.numericUpDown_DilatationY);
@@ -346,6 +370,8 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button button_SelectPoint;
         private System.Windows.Forms.Button button_ClearPoint;
+        private System.Windows.Forms.Button button_Classificate;
+        private System.Windows.Forms.Button button_SelectEdge;
     }
 }
 
